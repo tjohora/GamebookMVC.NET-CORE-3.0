@@ -1,0 +1,55 @@
+﻿@model CA3_TATJ_V2.ViewModels.PostListViewModel
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">title</th>
+            <th scope="col">content</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Posts) 
+{
+        <tr>
+            <th scope="row">@item.postId</th>
+            <td>@item.postHeader</td>
+            <td>@item.postContent</td>
+            <td>@item.postDate</td>
+        </tr>
+
+        @*<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.userName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postHeader)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.postId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.postId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.postId">Delete</a>
+            </td>
+        </tr>*@
+
+
+}
+    </tbody>
+</table>

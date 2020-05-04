@@ -1,4 +1,6 @@
 ﻿@model CA3_TATJ_V2.Models.Post
+@using Microsoft.AspNetCore.Identity
+
 
 @{
     ViewData["Title"] = "Create";
@@ -12,25 +14,23 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <p>@User.Identity.Name</p>
+            <p id="date"></p>
             <div class="form-group">
-                <label asp-for="userName" class="control-label"></label>
-                <input asp-for="userName" class="form-control" />
-                <span asp-validation-for="userName" class="text-danger"></span>
+                <input type="hidden" asp-for="userName" class="form-control" value="@User.Identity.Name" />
             </div>
             <div class="form-group">
                 <label asp-for="postHeader" class="control-label"></label>
-                <input asp-for="postHeader" class="form-control" />
+                <input asp-for="postHeader" class="form-control"/>
                 <span asp-validation-for="postHeader" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="postContent" class="control-label"></label>
-                <input asp-for="postContent" class="form-control" />
+                <input asp-for="postContent" class="form-control" id="date" />
                 <span asp-validation-for="postContent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="postDate" class="control-label"></label>
-                <input asp-for="postDate" class="form-control" />
-                <span asp-validation-for="postDate" class="text-danger"></span>
+                <input type="hidden" asp-for="postDate" class="form-control" id="date" value="1/1/2000" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -38,6 +38,15 @@
         </form>
     </div>
 </div>
+<script>
+    var currentDate = new Date();
+    var dd = String(currentDate.getDate());
+    var mm = String(currentDate.getMonth() + 1);
+    var yyyy = currentDate.getFullYear();
+    var test = dd + '/' + mm + '/' + yyyy;
+
+    document.getElementById('date').innerHTML = test;
+</script>
 
 <div>
     <a asp-action="Index">Back to List</a>

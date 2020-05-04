@@ -12,6 +12,7 @@ using CA3_TATJ_V2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CA3_TATJ_V2.Models;
 
 namespace CA3_TATJ_V2
 {
@@ -33,6 +34,7 @@ namespace CA3_TATJ_V2
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddRazorPages();
         }
 
