@@ -36,6 +36,7 @@ namespace CA3_TATJ_V2
             services.AddControllersWithViews();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddRazorPages();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +65,7 @@ namespace CA3_TATJ_V2
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Post}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

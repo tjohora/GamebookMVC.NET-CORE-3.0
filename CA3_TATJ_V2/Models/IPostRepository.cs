@@ -8,6 +8,6 @@ namespace CA3_TATJ_V2.Models
     public interface IPostRepository
     {
         IEnumerable<Post> allPosts { get; }
-        //Post GetPostById(int postId);
+        Post GetPostById(int postId);
     }
 }

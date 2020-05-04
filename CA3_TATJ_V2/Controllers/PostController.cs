@@ -6,6 +6,7 @@ using CA3_TATJ_V2.Data;
 using CA3_TATJ_V2.Models;
 using CA3_TATJ_V2.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,11 +28,6 @@ namespace CA3_TATJ_V2.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public ViewResult List()
-        {
             PostListViewModel postListViewModel = new PostListViewModel();
             postListViewModel.Posts = _PostRepository.allPosts;
             ViewBag.CurrenCategory = "Posts";
@@ -51,9 +47,76 @@ namespace CA3_TATJ_V2.Controllers
             {
                 _context.Add(post);
                 await _context.SaveChangesAsync();
-                return Redirect(nameof(List));
+                return Redirect(nameof(Index));
             }
             return View(post);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var post = await _context.Posts
+                .FirstOrDefaultAsync(p => p.postId == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return View(post);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            Console.WriteLine("testc");
+            Console.WriteLine(id);
+            var post = await _context.Posts.FindAsync(id);
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var post = await _context.Posts.FindAsync(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("postId,userName,postHeader,postContent,postDate")] Post post)
+        {
+            post.postId = id;
+            //if (ModelState.IsValid)
+            if (true)
+            {
+                try
+                {
+                    _context.Update(post);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                Console.WriteLine("Done!");
+                return RedirectToAction(nameof(Index));
+            }
+            Console.WriteLine("Not Done!");
+            return View(post);
+        }
+
     }
 }
