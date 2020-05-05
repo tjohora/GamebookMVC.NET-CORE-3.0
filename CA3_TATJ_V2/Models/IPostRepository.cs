@@ -9,5 +9,6 @@ namespace CA3_TATJ_V2.Models
     {
         IEnumerable<Post> allPosts { get; }
         Post GetPostById(int postId);
+        IEnumerable<Post> GetPostsBySearch(String search);
     }
 }

@@ -123,5 +123,17 @@ namespace CA3_TATJ_V2.Controllers
             return View(post);
         }
 
+        public IActionResult Search(string id)
+        {
+
+            PostListViewModel postListViewModel = new PostListViewModel();
+            postListViewModel.Posts = _PostRepository.GetPostsBySearch(id);
+            Console.WriteLine(id);
+            Console.WriteLine("Test");
+            Console.WriteLine(postListViewModel.Posts.Count());
+            ViewBag.CurrenCategory = "Posts";
+            return View(postListViewModel);
+        }
+
     }
 }

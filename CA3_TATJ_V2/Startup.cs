@@ -37,6 +37,9 @@ namespace CA3_TATJ_V2
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddRazorPages();
             services.AddHttpContextAccessor();
+        //    services.AddMvc().AddJsonOptions(options => {
+        //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

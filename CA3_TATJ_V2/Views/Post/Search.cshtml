@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+@model CA3_TATJ_V2.ViewModels.PostListViewModel
+<h1>Searched</h1>
+
+@foreach (var post in Model.Posts)
+{
+    <partial name="_DisplayPostPartial" model="post" />
+}

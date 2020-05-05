@@ -27,5 +27,11 @@ namespace CA3_TATJ_V2.Models
         {
             return _context.Posts.FirstOrDefault(p => p.postId == postId);
         }
+
+        public IEnumerable<Post> GetPostsBySearch(string search)
+        {
+            yield return _context.Posts.FirstOrDefault(p => p.postHeader.Contains(search));
+        }
+
     }
 }
