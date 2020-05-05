@@ -13,7 +13,7 @@
 {
     <div class="w-50 p-3 border media rounded mx-auto">
         <div class="media-body">
-
+            
             @* Rating
 
             <li class="list-group-item" style="float: left; border: none">
@@ -38,8 +38,8 @@
             @if (@User.Identity.Name == @item.userName)
             {
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary"><a class="nav-link" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@item.postId" style="color:white">Edit</a></button>
-                    <button type="button" class="btn btn-danger"><a class="nav-link" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@item.postId" style="color:white">Delete</a></button>
+                    <a class="nbtn btn-secondary" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@item.postId" style="color:white">Edit</a>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@item.postId" style="color:white">Delete</a>
                 </div>
             }
 

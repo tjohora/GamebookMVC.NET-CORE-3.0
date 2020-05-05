@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CA3_TATJ_V2.Data;
 using CA3_TATJ_V2.Models;
 using CA3_TATJ_V2.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ namespace CA3_TATJ_V2.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IPostRepository _PostRepository;
+        private readonly UserManager<ApplicationUser> userManager;
         public PostController(IPostRepository PostRepository, ApplicationDbContext context)
         {
             _PostRepository = PostRepository;
@@ -116,6 +118,14 @@ namespace CA3_TATJ_V2.Controllers
             }
             Console.WriteLine("Not Done!");
             return View(post);
+        }
+
+        public ActionResult getUserPosts()
+        {
+            PostListViewModel postListViewModel = new PostListViewModel();
+            postListViewModel.Posts = _PostRepository.allPosts;
+            ViewBag.CurrenCategory = "Posts";
+            return View(postListViewModel);
         }
 
     }
