@@ -1,0 +1,47 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+
+@model CA3_TATJ_V2.ViewModels.PostListViewModel
+@{
+    ViewData["Title"] = "View";
+}
+
+
+    <div class="container">
+        
+        <div class="row">
+
+
+            <div class="col-">
+
+                <h1>Welcome  @User.Identity.Name</h1>
+
+            </div>
+
+                <div class="col-lg">
+
+                    @foreach (var post in Model.Posts)
+                    {
+
+                        @if (@User.Identity.Name == @post.userName)
+                        {
+                            <partial name="_DisplayPostPartial" model="post" />
+                        }
+
+                    }
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+
+    
+   
+
+
+
+

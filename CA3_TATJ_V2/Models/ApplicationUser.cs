@@ -8,5 +8,9 @@ namespace CA3_TATJ_V2.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string email { get; set; }
+
+        public string profilePic { get; set; }
+
     }
 }
