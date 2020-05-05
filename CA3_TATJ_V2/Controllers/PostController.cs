@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CA3_TATJ_V2.Data;
 using CA3_TATJ_V2.Models;
 using CA3_TATJ_V2.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,9 +23,6 @@ namespace CA3_TATJ_V2.Controllers
             _context = context;
         }
 
-
-
-
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -34,11 +32,13 @@ namespace CA3_TATJ_V2.Controllers
             return View(postListViewModel);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("postId,userName,postHeader,postContent,postDate")] Post post)
@@ -52,6 +52,7 @@ namespace CA3_TATJ_V2.Controllers
             return View(post);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -69,6 +70,7 @@ namespace CA3_TATJ_V2.Controllers
             return View(post);
         }
 
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -81,6 +83,7 @@ namespace CA3_TATJ_V2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +97,8 @@ namespace CA3_TATJ_V2.Controllers
             }
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("postId,userName,postHeader,postContent,postDate")] Post post)
