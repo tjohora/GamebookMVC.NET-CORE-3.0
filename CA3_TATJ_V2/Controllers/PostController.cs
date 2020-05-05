@@ -17,6 +17,7 @@ namespace CA3_TATJ_V2.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IPostRepository _PostRepository;
+        private readonly UserManager<ApplicationUser> userManager;
         public PostController(IPostRepository PostRepository, ApplicationDbContext context)
         {
             _PostRepository = PostRepository;
@@ -123,14 +124,10 @@ namespace CA3_TATJ_V2.Controllers
             return View(post);
         }
 
-        public IActionResult Search(string id)
+        public ActionResult getUserPosts()
         {
-
             PostListViewModel postListViewModel = new PostListViewModel();
-            postListViewModel.Posts = _PostRepository.GetPostsBySearch(id);
-            Console.WriteLine(id);
-            Console.WriteLine("Test");
-            Console.WriteLine(postListViewModel.Posts.Count());
+            postListViewModel.Posts = _PostRepository.allPosts;
             ViewBag.CurrenCategory = "Posts";
             return View(postListViewModel);
         }

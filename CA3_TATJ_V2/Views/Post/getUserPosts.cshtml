@@ -1,0 +1,69 @@
+﻿@model CA3_TATJ_V2.ViewModels.PostListViewModel
+@{
+    ViewData["Title"] = "View";
+}
+<div class="jumbotron">
+    <h1 class="display-3">Welcome to Gamebook!</h1>
+    <p class="lead">We are very happy to see you have found our web app. We hope you have a great time here.</p>
+    <hr class="my-2">
+    <p>This is the cool reddit for those that like games!</p>
+
+</div>
+@foreach (var item in Model.Posts)
+{
+    @if (@User.Identity.Name == @item.userName)
+    {
+        <div class="w-50 p-3 border media rounded mx-auto">
+            <div class="media-body">
+
+                @* Rating
+
+                        <li class="list-group-item" style="float: left; border: none">
+                        <i class="glyphicon glyphicon-arrow-up" (click)="rating(currentUser.userId, post.postId, 1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_up.png"> </i>
+
+                        <div *ngIf="!(ratingsMap).has(post.postId)">
+                            <span class="label label-primary">0</span>
+                        </div>
+                        <div *ngIf="ratingsMap.has(post.postId)">
+                            <span class="label label-primary">{{  }}</span>
+                        </div>
+
+                        <i class="glyphicon glyphicon-chevron-down" (click)="rating(currentUser.userId, post.postId, -1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_down.png"></i>
+                    </li>*@
+
+                <h4 class="mt-0">@item.postHeader</h4>
+                <p>Posted by @item.userName</p>
+
+                <div id="postOptions"></div>
+                <div id="test1"></div>
+                <div id="test2"></div>
+
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <a class="nbtn btn-secondary" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@item.postId" style="color:white">Edit</a>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@item.postId" style="color:white">Delete</a>
+                </div>
+
+
+                <small class="font-weight-lighter">@item.postDate</small>
+                <div>
+                    <p>@item.postContent</p>
+                </div>
+
+            </div>
+            <br>
+            <a asp-area="" asp-controller="Comment" asp-action="List">Comments</a>
+        </div>
+        @*<script>
+                var currentUser = @User.Identity.Name;
+                document.getElementById("test1").innerHTML = currentUser;
+                var postUser = @item.userName;
+                document.getElementById("test2").innerHTML = postUser;
+                if (currentUser == @item.userName) {
+                    document.getElementById("postOptions").removeAttribute("type");
+                }
+            </script>*@
+
+        @*<a asp-action="Edit" asp-route-id="@item.postId">Edit</a>*@
+    }
+
+}

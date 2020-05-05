@@ -14,5 +14,6 @@ namespace CA3_TATJ_V2.Data
         }
 
         public DbSet<Post> Posts { get; set; }
+
     }
 }
