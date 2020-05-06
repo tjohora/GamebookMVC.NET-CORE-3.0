@@ -41,7 +41,7 @@
 
                 <br>
                 <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.postId">Comment</a>
-                <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Index" >View Comments</a>
+                <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Index" asp-route-id="@Model.postId">View Comments</a>
 
             }
         </div>

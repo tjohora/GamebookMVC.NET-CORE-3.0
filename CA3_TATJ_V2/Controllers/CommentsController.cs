@@ -29,8 +29,9 @@ namespace CA3_TATJ_V2.Controllers
 
 
         //GET: Comments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            ViewBag.postId = id;
             CommentListViewModel commentListViewModel = new CommentListViewModel();
             commentListViewModel.Comments = _CommentRepository.allComments;
             ViewBag.CurrenCategory = "Comments";
