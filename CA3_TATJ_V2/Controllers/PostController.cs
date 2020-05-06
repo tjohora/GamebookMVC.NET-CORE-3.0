@@ -6,6 +6,7 @@ using CA3_TATJ_V2.Data;
 using CA3_TATJ_V2.Models;
 using CA3_TATJ_V2.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -128,6 +129,18 @@ namespace CA3_TATJ_V2.Controllers
         {
             PostListViewModel postListViewModel = new PostListViewModel();
             postListViewModel.Posts = _PostRepository.allPosts;
+            ViewBag.CurrenCategory = "Posts";
+            return View(postListViewModel);
+        }
+
+        public IActionResult Search(string id)
+        {
+
+            PostListViewModel postListViewModel = new PostListViewModel();
+            postListViewModel.Posts = _PostRepository.GetPostsBySearch(id);
+            Console.WriteLine(id);
+            Console.WriteLine("Test");
+            Console.WriteLine(postListViewModel.Posts.Count());
             ViewBag.CurrenCategory = "Posts";
             return View(postListViewModel);
         }
