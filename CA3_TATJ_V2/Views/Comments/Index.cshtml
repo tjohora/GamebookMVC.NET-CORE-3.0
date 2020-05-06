@@ -26,6 +26,13 @@
 
                 <p>Posted by @item.userName</p>
 
+                <small class="font-weight-lighter">@item.commentDate</small>
+                <div>
+                    <h4 class="mt-0">@item.content</h4>
+                    <h4 class="mt-0">@DateTime.Now</h4>
+
+                </div>
+
 
                 @if (@User.Identity.Name == @item.userName)
                 {
@@ -39,13 +46,8 @@
 
 
 
-                <small class="font-weight-lighter">@item.commentDate</small>
-                <div>
-                    <h4 class="mt-0">@item.content</h4>
-                    <h4 class="mt-0">@item.postId</h4>
-                    
-                </div>
-                }
+
+
 
 
             </div>
