@@ -35,6 +35,7 @@ namespace CA3_TATJ_V2
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddRazorPages();
             services.AddHttpContextAccessor();
         //    services.AddMvc().AddJsonOptions(options => {

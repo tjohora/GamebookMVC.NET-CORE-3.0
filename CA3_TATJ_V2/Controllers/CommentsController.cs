@@ -17,6 +17,7 @@ namespace CA3_TATJ_V2.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ICommentRepository _CommentRepository;
         private readonly IPostRepository _PostRepository;
+        private CommentMethods commentMethods;
 
         public CommentsController(IPostRepository PostRepository, ApplicationDbContext context, ICommentRepository CommentRepository)
         {
@@ -24,6 +25,8 @@ namespace CA3_TATJ_V2.Controllers
             _CommentRepository = CommentRepository;
             _context = context;
         }
+
+
 
         //GET: Comments
         public async Task<IActionResult> Index()
@@ -55,24 +58,30 @@ namespace CA3_TATJ_V2.Controllers
 
         // GET: Comments/Create
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            Post post = _PostRepository.allPosts.FirstOrDefault(p => p.postId == id);
+
+            if (id!=null)
+            {
+                ViewBag.postId = id;
+            }
+            
+
             return View();
         }
 
-        // POST: Comments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("commentID,commentDate,content,postId,userName")] Comment comment)
+        public async Task<IActionResult> Create([Bind("postId,content,userName,commentDate")] Comment comment)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect(nameof(Index));
             }
             return View(comment);
         }

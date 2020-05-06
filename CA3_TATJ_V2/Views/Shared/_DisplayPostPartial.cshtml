@@ -5,36 +5,44 @@
 
             @* Rating
 
-                <li class="list-group-item" style="float: left; border: none">
-                <i class="glyphicon glyphicon-arrow-up" (click)="rating(currentUser.userId, post.postId, 1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_up.png"> </i>
+            <li class="list-group-item" style="float: left; border: none">
+            <i class="glyphicon glyphicon-arrow-up" (click)="rating(currentUser.userId, post.postId, 1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_up.png"> </i>
 
-                <div *ngIf="!(ratingsMap).has(post.postId)">
-                    <span class="label label-primary">0</span>
-                </div>
-                <div *ngIf="ratingsMap.has(post.postId)">
-                    <span class="label label-primary">{{  }}</span>
-                </div>
+            <div *ngIf="!(ratingsMap).has(post.postId)">
+                <span class="label label-primary">0</span>
+            </div>
+            <div *ngIf="ratingsMap.has(post.postId)">
+                <span class="label label-primary">{{  }}</span>
+            </div>
 
-                <i class="glyphicon glyphicon-chevron-down" (click)="rating(currentUser.userId, post.postId, -1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_down.png"></i>
-            </li>*@
+            <i class="glyphicon glyphicon-chevron-down" (click)="rating(currentUser.userId, post.postId, -1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_down.png"></i>
+        </li>*@
 
             <h4 class="mt-0">@Model.postHeader</h4>
+
+
+            <div>
+                <p>@Model.postContent</p>
+            </div>
             <p>Posted by @Model.userName</p>
+
 
             @if (@User.Identity.Name == Model.userName)
             {
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-secondary"><a class="nav-link" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@Model.postId" style="color:white">Edit</a></button>
                     <button type="button" class="btn btn-danger"><a class="nav-link" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.postId" style="color:white">Delete</a></button>
+                    <small class="font-weight-lighter">@Model.postDate</small>
                 </div>
+
+
+
+
+
+                <br>
+                <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.postId">Comment</a>
+                <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Index" >View Comments</a>
+
             }
-
-            <small class="font-weight-lighter">@Model.postDate</small>
-            <div>
-                <p>@Model.postContent</p>
-            </div>
-
         </div>
-        <br>
-        <a asp-area="" asp-controller="Comment" asp-action="List">Comments</a>
-    </div>
+</div>

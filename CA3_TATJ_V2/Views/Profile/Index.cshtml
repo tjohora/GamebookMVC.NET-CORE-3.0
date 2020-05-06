@@ -5,42 +5,37 @@
 @{
     ViewData["Title"] = "View";
 }
-
-
+    <div>
+        <h1>Welcome  @User.Identity.Name</h1>
+    </div>
     <div class="container">
-        
         <div class="row">
+            <div class="col-sm- border-right border-top border-bottom">
+                
 
-
-            <div class="col-">
-
-                <h1>Welcome  @User.Identity.Name</h1>
-
+                <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Create">Make a Post</a>
             </div>
+            <div class="col-sm border-left border-top border-bottom">
+            <div class="text-center">
+                <h3>Your Posts</h3>
+            </div>
+                
+                @foreach (var post in Model.Posts)
+                {
 
-                <div class="col-lg">
-
-                    @foreach (var post in Model.Posts)
+                    @if (@User.Identity.Name == @post.userName)
                     {
-
-                        @if (@User.Identity.Name == @post.userName)
-                        {
-                            <partial name="_DisplayPostPartial" model="post" />
-                        }
-
+                        <partial name="_DisplayPostPartial" model="post" />
                     }
-                </div>
 
-
-
-
-
-
+                }
             </div>
         </div>
+    </div>
 
-    
-   
+
+
+
 
 
 

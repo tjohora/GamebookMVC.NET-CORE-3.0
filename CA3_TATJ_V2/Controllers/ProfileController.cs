@@ -1,6 +1,7 @@
 ﻿using CA3_TATJ_V2.Data;
 using CA3_TATJ_V2.Models;
 using CA3_TATJ_V2.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,7 +24,7 @@ namespace CA3_TATJ_V2.Controllers
             _context = context;
             
         }
-
+        [Authorize]
         public IActionResult Index()
             {
 

@@ -13,7 +13,6 @@ namespace CA3_TATJ_V2.Models
         public int postId { get; set; }
         public string userName { get; set; }
 
-        //public virtual Post Post { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        
     }
 }

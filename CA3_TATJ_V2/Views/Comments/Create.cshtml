@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var postId = ViewBag.postId;
 }
 
 <h1>Create</h1>
@@ -15,9 +16,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 @*<label asp-for="commentDate" class="control-label"></label>
-        <input asp-for="commentDate" class="form-control" />
-        <span asp-validation-for="commentDate" class="text-danger"></span>*@
-            <input type="hidden" asp-for="commentDate" class="form-control" id="date" value="1/1/2000" />
+            <input asp-for="commentDate" class="form-control" />
+            <span asp-validation-for="commentDate" class="text-danger"></span>*@
+                <input type="hidden" asp-for="commentDate" class="form-control" id="date" value="1/1/2000" />
             </div>
             <div class="form-group">
                 <label asp-for="content" class="control-label"></label>
@@ -25,15 +26,19 @@
                 <span asp-validation-for="content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="postId" class="control-label"></label>
-                <input asp-for="postId" class="form-control" />
+                <input type="hidden" asp-for="postId" value="@postId" />
                 <span asp-validation-for="postId" class="text-danger"></span>
             </div>
+            <div></div>
             <div class="form-group">
                 <input type="hidden" asp-for="userName" class="form-control" value="@User.Identity.Name" />
             </div>
             <div class="form-group">
+                <input type="hidden" asp-for="commentDate" class="form-control" id="date" value="1/1/2000" />
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+
             </div>
         </form>
     </div>
