@@ -1,6 +1,18 @@
 ﻿@model IEnumerable<CA3_TATJ_V2.Models.Comment>
 @*@model CA3_TATJ_V2.ViewModels.CommentListViewModel*@
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -34,15 +46,28 @@
                 </div>
 
 
-                @if (@User.Identity.Name == @item.userName)
-                {
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary"><a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Edit" asp-route-id="@item.commentID" style="color:white">Edit</a></button>
-                        <button type="button" class="btn btn-danger"><a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Delete" asp-route-id="@item.commentID" style="color:white">Delete</a></button>
+
+
+
+
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle float-left" data-toggle="dropdown">
+                        Options
+                    </button>
+                    <div class="dropdown-menu">
+
+
+                        @if (@User.Identity.Name == @item.userName)
+                        {
+                            <a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Edit" asp-route-id="@item.commentID">Edit</a>
+                            <a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Delete" asp-route-id="@item.commentID">Delete</a>
+                        }
+
+
+
+
                     </div>
-                }
-
-
+                </div>
 
 
 

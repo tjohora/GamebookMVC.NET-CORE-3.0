@@ -1,48 +1,55 @@
 ﻿@model Post
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-    <div class="w-50 p-3 border media rounded mx-auto" style="background-color: white">
-        <div class="media-body">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-            @* Rating
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-            <li class="list-group-item" style="float: left; border: none">
-            <i class="glyphicon glyphicon-arrow-up" (click)="rating(currentUser.userId, post.postId, 1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_up.png"> </i>
-
-            <div *ngIf="!(ratingsMap).has(post.postId)">
-                <span class="label label-primary">0</span>
-            </div>
-            <div *ngIf="ratingsMap.has(post.postId)">
-                <span class="label label-primary">{{  }}</span>
-            </div>
-
-            <i class="glyphicon glyphicon-chevron-down" (click)="rating(currentUser.userId, post.postId, -1)"><img width="20px" height="20px" src="../../../assets/img/thumbs_down.png"></i>
-        </li>*@
-
-            <h4 class="mt-0">@Model.postHeader</h4>
-
-
-            <div>
-                <p>@Model.postContent</p>
-            </div>
-            <p>Posted by @Model.userName</p>
-
-
-            @if (@User.Identity.Name == Model.userName)
-            {
-                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary"><a class="nav-link" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@Model.postId" style="color:white">Edit</a></button>
-                    <button type="button" class="btn btn-danger"><a class="nav-link" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.postId" style="color:white">Delete</a></button>
-                    <small class="font-weight-lighter">@Model.postDate</small>
-                </div>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<div class="w-50 p-3 border media rounded mx-auto" style="background-color: white">
+    <div class="media-body">
 
 
 
+        <h4 class="mt-0">@Model.postHeader</h4>
 
 
-                <br>
-                <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.postId">Comment</a>
-                <a class="btn btn-outline-success" asp-controller="Comments" asp-action="Index" asp-route-id="@Model.postId">View Comments</a>
-
-            }
+        <div>
+            <p>@Model.postContent</p>
         </div>
+        <p>Posted by @Model.userName</p>
+        <small class="font-weight-lighter">@Model.postDate</small>
+
+
+        
+        
+
+
+
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle float-left" data-toggle="dropdown">
+                    Options
+                </button>
+                <div class="dropdown-menu">
+
+
+                    @if (@User.Identity.Name == Model.userName)
+                    {
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@Model.postId">Edit</a>
+                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.postId">Delete</a>
+                    }
+
+
+
+                    <a class="btn btn-outline-primary" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.postId">Comment</a>
+                    <a class="btn btn-outline-primary" asp-controller="Comments" asp-action="Index" asp-route-id="@Model.postId">View Comments</a>
+                </div>
+            </div>
+
+        
+    </div>
 </div>
