@@ -18,7 +18,7 @@ namespace CA3_TATJ_V2.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IPostRepository _PostRepository;
-        private readonly UserManager<ApplicationUser> userManager;
+        
         public PostController(IPostRepository PostRepository, ApplicationDbContext context)
         {
             _PostRepository = PostRepository;

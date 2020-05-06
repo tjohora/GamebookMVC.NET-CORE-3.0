@@ -4,14 +4,16 @@ using CA3_TATJ_V2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CA3_TATJ_V2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200506111517_Comments")]
+    partial class Comments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +52,9 @@ namespace CA3_TATJ_V2.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("commentID")
+                        .HasColumnType("int");
+
                     b.Property<string>("postContent")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -68,6 +73,8 @@ namespace CA3_TATJ_V2.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("postId");
+
+                    b.HasIndex("commentID");
 
                     b.ToTable("Posts");
                 });
@@ -270,6 +277,13 @@ namespace CA3_TATJ_V2.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CA3_TATJ_V2.Models.Post", b =>
+                {
+                    b.HasOne("CA3_TATJ_V2.Models.Comment", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("commentID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

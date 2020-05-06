@@ -4,44 +4,22 @@ using CA3_TATJ_V2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CA3_TATJ_V2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200505155629_ProfilePic")]
+    partial class ProfilePic
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CA3_TATJ_V2.Models.Comment", b =>
-                {
-                    b.Property<int>("commentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("commentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("postId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("userName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("commentID");
-
-                    b.ToTable("Comments");
-                });
 
             modelBuilder.Entity("CA3_TATJ_V2.Models.Post", b =>
                 {
