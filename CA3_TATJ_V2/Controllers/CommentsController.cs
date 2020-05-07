@@ -9,6 +9,7 @@ using CA3_TATJ_V2.Data;
 using CA3_TATJ_V2.Models;
 using CA3_TATJ_V2.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
 
 namespace CA3_TATJ_V2.Controllers
 {
@@ -33,10 +34,9 @@ namespace CA3_TATJ_V2.Controllers
         {
             ViewBag.postId = id;
             CommentListViewModel commentListViewModel = new CommentListViewModel();
-            commentListViewModel.Comments = _CommentRepository.allComments;
+            commentListViewModel.Comments = _CommentRepository.allComments.OrderBy(a => a.commentDate);
             ViewBag.CurrenCategory = "Comments";
             return View(await _context.Comments.ToListAsync());
-            //return View(_context.Comments.ToListAsync);
         }
 
         // GET: Comments/Details/5
@@ -82,7 +82,8 @@ namespace CA3_TATJ_V2.Controllers
             {
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return Redirect(nameof(Index));
+                return RedirectToAction("Index", new RouteValueDictionary(
+                new { controller = "Comments", action = "Index", Id = comment.postId }));
             }
             return View(comment);
         }
@@ -135,7 +136,8 @@ namespace CA3_TATJ_V2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new RouteValueDictionary(
+                new { controller = "Comments", action = "Index", Id = comment.postId }));
             }
             return View(comment);
         }
@@ -168,7 +170,8 @@ namespace CA3_TATJ_V2.Controllers
             var comment = await _context.Comments.FindAsync(id);
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new RouteValueDictionary(
+            new { controller = "Comments", action = "Index", Id = comment.postId }));
         }
 
         private bool CommentExists(int id)

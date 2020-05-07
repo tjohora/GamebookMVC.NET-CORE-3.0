@@ -15,9 +15,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="commentID" />
             <div class="form-group">
-                <label asp-for="commentDate" class="control-label"></label>
-                <input asp-for="commentDate" class="form-control" />
-                <span asp-validation-for="commentDate" class="text-danger"></span>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="commentDate" />
             </div>
             <div class="form-group">
                 <label asp-for="content" class="control-label"></label>

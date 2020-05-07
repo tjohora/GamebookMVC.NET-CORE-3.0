@@ -27,12 +27,10 @@
 
 </div>
 
-
 @foreach (var item in Model)
 {
     @if (postId == item.postId)
     {
-
         <div class="w-30 p-3 border media rounded mx-auto">
             <div class="media-body">
 
@@ -41,43 +39,25 @@
                 <small class="font-weight-lighter">@item.commentDate</small>
                 <div>
                     <h4 class="mt-0">@item.content</h4>
-                    <h4 class="mt-0">@DateTime.Now</h4>
+                    @*<h4 class="mt-0">@DateTime.Now</h4>*@
 
                 </div>
-
-
-
-
-
 
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle float-left" data-toggle="dropdown">
                         Options
                     </button>
                     <div class="dropdown-menu">
-
-
                         @if (@User.Identity.Name == @item.userName)
                         {
                             <a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Edit" asp-route-id="@item.commentID">Edit</a>
                             <a class="nav-link" asp-area="" asp-controller="Comments" asp-action="Delete" asp-route-id="@item.commentID">Delete</a>
                         }
-
-
-
-
                     </div>
                 </div>
-
-
-
-
-
-
-
             </div>
             <br>
-        </div>
+       </div>
     }
 }
 
