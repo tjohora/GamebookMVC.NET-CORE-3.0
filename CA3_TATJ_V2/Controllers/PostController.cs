@@ -8,6 +8,7 @@ using CA3_TATJ_V2.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -85,6 +86,7 @@ namespace CA3_TATJ_V2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Post/Edit/5
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -92,22 +94,29 @@ namespace CA3_TATJ_V2.Controllers
             {
                 return NotFound();
             }
+
             var post = await _context.Posts.FindAsync(id);
             if (post == null)
             {
                 return NotFound();
             }
-            return View();
+            return View(post);
         }
 
+        // POST: Post/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("postId,userName,postHeader,postContent,postDate")] Post post)
         {
-            post.postId = id;
-            //if (ModelState.IsValid)
-            if (true)
+            if (id != post.postId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -116,14 +125,60 @@ namespace CA3_TATJ_V2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!PostExists(post.postId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-                Console.WriteLine("Done!");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new RouteValueDictionary(
+                new { controller = "Post", action = "Index", Id = post.postId }));
             }
-            Console.WriteLine("Not Done!");
             return View(post);
         }
+
+        //[Authorize]
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var post = await _context.Posts.FindAsync(id);
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View();
+        //}
+
+        //[Authorize]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("postId,userName,postHeader,postContent,postDate")] Post post)
+        //{
+        //    post.postId = id;
+        //    //if (ModelState.IsValid)
+        //    if (true)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(post);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            throw;
+        //        }
+        //        Console.WriteLine("Done!");
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    Console.WriteLine("Not Done!");
+        //    return View(post);
+        //}
 
         public ActionResult getUserPosts()
         {
@@ -143,6 +198,11 @@ namespace CA3_TATJ_V2.Controllers
             Console.WriteLine(postListViewModel.Posts.Count());
             ViewBag.CurrenCategory = "Posts";
             return View(postListViewModel);
+        }
+
+        private bool PostExists(int id)
+        {
+            return _context.Posts.Any(e => e.postId == id);
         }
 
     }
