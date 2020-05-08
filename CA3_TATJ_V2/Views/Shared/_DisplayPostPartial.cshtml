@@ -21,17 +21,23 @@
         <p>Posted by: <h5>@Model.userName</h5></p>
         <small class="font-weight-lighter">@Model.postDate</small>
 
-        
-       
+
+
     </div>
     <div>
-        @if (@User.Identity.Name == Model.userName)
-        {
-            <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@Model.postId">Edit</a>
-            <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.postId">Delete</a>
-        }
-        <a class="btn btn-outline-primary" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.postId">Make Comment</a>
-        <a class="btn btn-outline-primary" asp-controller="Comments" asp-action="Index" asp-route-id="@Model.postId">View All Comments</a>
+        <div>
+            @if (@User.Identity.Name == Model.userName)
+            {
+                <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Edit" asp-route-id="@Model.postId">Edit</a>
+                <a class="btn btn-outline-primary" asp-area="" asp-controller="Post" asp-action="Delete" asp-route-id="@Model.postId">Delete</a>
+            }
+        </div>
+        <div>
+            <a class="btn btn-outline-primary" asp-controller="Comments" asp-action="Create" asp-route-id="@Model.postId">Make Comment</a>
+            <a class="btn btn-outline-primary" asp-controller="Comments" asp-action="Index" asp-route-id="@Model.postId">View All Comments</a>
+        </div>
+
+
     </div>
 </div>
 
