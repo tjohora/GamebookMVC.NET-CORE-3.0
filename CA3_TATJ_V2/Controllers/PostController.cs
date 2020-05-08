@@ -29,7 +29,7 @@ namespace CA3_TATJ_V2.Controllers
         public IActionResult Index()
         {
             PostListViewModel postListViewModel = new PostListViewModel();
-            postListViewModel.Posts = _PostRepository.allPosts.OrderBy(a => a.postDate);
+            postListViewModel.Posts = _PostRepository.allPosts.OrderByDescending(a => a.postDate);
             ViewBag.CurrenCategory = "Posts";
             return View(postListViewModel);
         }

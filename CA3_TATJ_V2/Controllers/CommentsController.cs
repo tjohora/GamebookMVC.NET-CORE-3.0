@@ -34,7 +34,7 @@ namespace CA3_TATJ_V2.Controllers
         {
             ViewBag.postId = id;
             CommentListViewModel commentListViewModel = new CommentListViewModel();
-            commentListViewModel.Comments = _CommentRepository.allComments.OrderBy(a => a.commentDate);
+            commentListViewModel.Comments = _CommentRepository.allComments.OrderByDescending(a => a.commentDate);
 
             ViewBag.CurrenCategory = "Comments";
             return View(await _context.Comments.ToListAsync());
